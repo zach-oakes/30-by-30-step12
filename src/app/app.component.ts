@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '30-by-30-step12';
+  title = 'Flight Tracker';
 }
