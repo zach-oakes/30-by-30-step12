@@ -1,0 +1,39 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.password-input{
+    min-width: 250px;
+}
+
+.username-input {
+    min-width: 250px;
+    margin-bottom: .5rem;
+}
+
+.app-title {
+    margin: auto;
+    display: flex;
+    align-items: center;
+
+    .icon {
+        margin-left: .5rem;
+    }
+}
+
+.login-text {
+    margin-bottom: 1.25rem;
+}
+
+.account-exists {
+    margin-top: 2rem;
+    color: red;
+}
+
+.login-button {
+    margin-top: 2rem;
+}

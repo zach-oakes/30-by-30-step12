@@ -1,0 +1,135 @@
+<div class="flight-not-found" *ngIf="!flight; else elseBlock">
+    Cannot find flight with id [{{ flightId }}]
+    <button class="go-back" mat-stroked-button color="primary" [routerLink]="'/flights'">
+        Go Back
+    </button>
+</div>
+<ng-template #elseBlock>
+    <ng-container *ngIf="flight">
+        <div *ngIf="!isLoading; else loading" class="edit-add-flight-container">
+            <div class="flight-form">
+                <div class="edit-add-form-title">
+                    <div *ngIf="flight.id; else elseBlock">
+                        Edit Flight
+                    </div>
+                    <ng-template #elseBlock>
+                        Create New Flight
+                    </ng-template>
+                </div>
+                <mat-divider></mat-divider>
+
+                <!--Flight Name-->
+                <div>
+                    <mat-form-field appearance="outline" hintLabel="Max 50 characters" class="flight-name-input">
+                        <mat-label>Flight Name</mat-label>
+                        <input matInput #flightNameInput maxlength="50" [(ngModel)]="flight.name" [required]="true"
+                               name="name">
+                        <mat-hint align="end">{{ flightNameInput.value.length }}/50</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <!--Airline Name-->
+                <div>
+                    <mat-form-field appearance="outline" hintLabel="Max 50 characters" class="airline-name-input">
+                        <mat-label>Airline</mat-label>
+                        <input matInput #airlineNameInput maxlength="50" [(ngModel)]="flight.airline"
+                               [required]="true" name="flight">
+                        <mat-hint align="end">{{ airlineNameInput.value.length }}/50</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <!--Seat Number-->
+                    <mat-form-field appearance="outline" class="seat-number-input">
+                        <mat-label>Seat Number</mat-label>
+                        <input matInput type="number" [(ngModel)]="flight.seatNumber" [required]="true"
+                               name="seatNumber">
+                        <mat-hint>Max value 200</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <!--Departure Date-->
+                <div class="departure-date-picker">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Departure</mat-label>
+                        <input
+                                (dateChange)="onDepartureDateChange($event.value)"
+                                name="departure"
+                                matInput
+                                [matDatepicker]="departurePicker"
+                                [value]="departureDateStringToDate"
+                        >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="departurePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #departurePicker></mat-datepicker>
+                    </mat-form-field>
+                    <div class="invalid-departure" *ngIf="invalidDeparture">
+                        Departure must be before or equal to arrival
+                    </div>
+                </div>
+
+                <!--Arrival Date-->
+                <div class="arrival-date-picker">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Arrival</mat-label>
+                        <input
+                                (dateChange)="onArrivalDateChange($event.value)"
+                                name="arrival"
+                                matInput
+                                [matDatepicker]="arrivalPicker"
+                                [value]="arrivalDateStringToDate"
+                        >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #arrivalPicker></mat-datepicker>
+                    </mat-form-field>
+                    <div class="invalid-arrival" *ngIf="invalidArrival">
+                        Arrival must be after or equal to departure
+                    </div>
+                </div>
+                <div class="spacer"></div>
+
+                <!--Flight Class-->
+                <div class="radio-buttons">
+                    <label for="style">Class: </label>
+                    <mat-radio-group
+                            required="true"
+                            color="primary"
+                            id="style"
+                            aria-label="Flight Class"
+                            [(ngModel)]="flight.flightClass"
+                            name="style"
+                    >
+                        <mat-radio-button *ngFor="let c of flightClasses" class="radio-button"
+                                          [value]="c">{{ c }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <!--Non Stop-->
+                <div class="non-stop">
+                    <mat-checkbox color="primary" [(ngModel)]="flight.nonStop" (change)="!flight.nonStop">
+                        Nonstop?
+                    </mat-checkbox>
+                </div>
+
+                <!--Add/Edit button-->
+                <button class="add-edit-button" mat-stroked-button color="primary"
+                        (click)="flight.id ? updateFlight(flight) : addFlight(flight)
+                      " [disabled]="isButtonDisabled"
+                >
+                    {{ flight.id ? 'Edit' : 'Add' }} Flight
+                </button>
+
+                <!--Cancel Button-->
+                <button class="cancel-button" mat-stroked-button color="primary" [routerLink]="'/flights'">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #loading>
+        <div class="spinner">
+            <mat-spinner></mat-spinner>
+        </div>
+    </ng-template>
+</ng-template>

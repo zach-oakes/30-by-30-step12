@@ -1,0 +1,66 @@
+.flight-form {
+    padding: .5rem;
+    height: 70vh;
+    border-radius: .5rem;
+    margin: 1rem;
+}
+
+.non-stop,
+.radio-buttons {
+    margin-bottom: 1rem;
+}
+
+
+.edit-add-form-title {
+    font-size: x-large;
+    margin-bottom: 1.5rem;
+    margin-left: .5rem;
+    text-align: center;
+}
+
+.edit-add-flight-container {
+    margin-top: 1.5rem;
+    height: 60vh;
+    flex: 1 1 0;
+}
+
+.departure-date-picker,
+.arrival-date-picker {
+    margin-bottom: .5rem;
+}
+
+.invalid-arrival,
+.invalid-departure {
+    margin: .25rem .25rem;
+    color: red;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.cancel-button {
+    margin-left: .5rem;
+}
+
+.flight-not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    font-size: x-large;
+
+    button {
+        margin-top: 1rem;
+    }
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}

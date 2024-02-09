@@ -1,0 +1,7 @@
+<div class="dashboard-view">
+    <h2 *ngIf="userService.getLoggedInUser() as username">Welcome to Flight Tracker, {{ username }}!</h2>
+    <p> View your upcoming flights by clicking on Flights in the sidebar on the left or create a new one with the Create Flight button.</p>
+    <button class="create-flight-button" mat-stroked-button color="primary" routerLink="/flight/new">
+        Create Flight
+    </button>
+</div>

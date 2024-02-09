@@ -1,0 +1,34 @@
+<form (ngSubmit)="login()">
+    <div class="login-text"><span>Sign in to track your upcoming flights</span></div>
+
+    <!--Username-->
+    <mat-form-field appearance="outline" class="username-input">
+        <mat-label>Username</mat-label>
+        <input matInput name="username" [(ngModel)]="username" [required]="true">
+    </mat-form-field>
+
+    <!--Password-->
+    <mat-form-field appearance="outline" class="password-input">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password"
+               [required]="true">
+        <button mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+        >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+    </mat-form-field>
+    <button class="login-button" mat-stroked-button color="primary" type="submit" [disabled]="isDisabled">
+        Login
+    </button>
+    <div class="failed-login" *ngIf="loginFailed">
+        <p>Authentication Failed</p>
+    </div>
+    <div class="create-account">
+        Don't have an account? Create one <a [routerLink]="'/createAccount'"> here</a>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+}
+
+.delete-button-container,
+.flights-container {
+    margin: 1rem;
+
+    .add-button {
+        margin-right: .5rem;
+    }
+}
+
+.table-title {
+    font-size: x-large;
+    margin-bottom: 1.5rem;
+    margin-left: .5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
