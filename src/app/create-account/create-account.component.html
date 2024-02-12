@@ -1,0 +1,65 @@
+<form (ngSubmit)="createAccount()">
+    <div class="login-text"><span>Create New Account</span></div>
+    <!--Username-->
+    <mat-form-field hintLabel="Max 10 characters" appearance="outline" class="username-input">
+        <mat-label>Username</mat-label>
+        <input matInput #input maxlength="10" [(ngModel)]="username" name="username" [required]="true">
+        <mat-hint align="end">{{ input.value.length }}/10</mat-hint>
+    </mat-form-field>
+
+    <!--Password-->
+    <mat-form-field appearance="outline" class="password-input">
+        <mat-label>Password</mat-label>
+        <input matInput
+               [type]="hidePassword ? 'password' : 'text'"
+               [(ngModel)]="password"
+               name="password"
+               [required]="true"
+               [minlength]="5"
+        >
+        <button mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+        >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <!--Confirm Password-->
+    <mat-form-field appearance="outline" class="confirm-password-input">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput
+               [type]="hideConfirmPassword ? 'password' : 'text'"
+               [(ngModel)]="confirmPassword"
+               name="confirm-password"
+               [required]="true"
+               [minlength]="5"
+        >
+        <button mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hideConfirmPassword = !hideConfirmPassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideConfirmPassword"
+        >
+            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-hint>At least 5 characters, 1 uppercase, 1 special character</mat-hint>
+    </mat-form-field>
+
+    <button
+            class="login-button"
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            [disabled]="isDisabled"
+    >
+        Create Account
+    </button>
+    <div class="account-exists" *ngIf="accountExists">
+        Account Exists. Please try a different username.
+    </div>
+</form>
